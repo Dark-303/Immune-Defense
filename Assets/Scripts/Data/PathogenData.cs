@@ -9,5 +9,5 @@ public class PathogenData : ScriptableObject
     public int maxDamage;
     public Sprite visualSprite;
 
-    // TODO: Add smthsmth antigens
+    public AntigenData
 }
