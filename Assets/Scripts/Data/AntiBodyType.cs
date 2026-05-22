@@ -7,4 +7,5 @@ enum AntiBodyType
     fIgG1,
     fIgG2,
     fIgG3,
+    fIgE
 }
