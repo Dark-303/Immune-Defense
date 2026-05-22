@@ -4,10 +4,10 @@ using UnityEngine;
 public class PathogenData : ScriptableObject
 {
     [Header("Biological Stats")]
-    public string pathogenName;
-    public int maxHP;
-    public int maxDamage;
-    public Sprite visualSprite;
+    [SerializeField] private string pathogenName;
+    [SerializeField] private int maxHP;
+    [SerializeField] private int maxDamage;
+    [SerializeField] private Sprite visualSprite;
 
-    public AntigenData
+    [SerializeField] private AntigenData antigen;
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCard", menuName = "Enemies/AntigenData")]
+[CreateAssetMenu(fileName = "NewAntigen", menuName = "Enemies/AntigenData")]
 public class AntigenData : ScriptableObject
 {
     [SerializeField] private string uniProtID;

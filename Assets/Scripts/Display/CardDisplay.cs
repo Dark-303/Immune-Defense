@@ -17,23 +17,17 @@ public class CardDisplay : MonoBehaviour
 
     private void Start()
     {
-        if (data != null)
-        {
-            nameText.text = data.cardName;
-            descText.text = data.desc;
-            costText.text = data.cost.ToString();
-            artworkImage.sprite = data.cardImage;
-        }
+        UpdateVisuals();
     }
 
     public void UpdateVisuals()
     {
         if (data != null)
         {
-            nameText.text = data.cardName;
-            descText.text = data.desc;
-            costText.text = data.cost.ToString();
-            if (data.cardImage != null) artworkImage.sprite = data.cardImage;
+            nameText.text = data.GetCardName();
+            descText.text = data.GetDesc();
+            costText.text = data.GetCost().ToString();
+            if (data.GetImage() != null) artworkImage.sprite = data.GetImage();
         }
     }
 
