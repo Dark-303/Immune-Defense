@@ -10,9 +10,20 @@ public class AntiBodyManager : MonoBehaviour
 
     public void AddAntiBody(AntiBodyData antiBody)
     {
-        GameObject newIg = Instantiate(antibodyPrefab, antibodyArea);
-        AntiBodyDisplay display = newIg.GetComponent<AntiBodyDisplay>();
-        display.SetData(antiBody);
-        display.UpdateVisuals();
+        if (antibodyArea.childCount < 4)
+        {
+            GameObject newIg = Instantiate(antibodyPrefab, antibodyArea);
+            AntiBodyDisplay display = newIg.GetComponent<AntiBodyDisplay>();
+            display.SetData(antiBody);
+            display.UpdateVisuals();
+        }
+    }
+
+    public void Clear()
+    {
+        foreach (Transform child in antibodyArea)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

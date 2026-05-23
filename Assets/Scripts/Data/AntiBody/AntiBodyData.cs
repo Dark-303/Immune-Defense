@@ -1,7 +1,7 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewAntiBody", menuName = "ImmuneDenfense/AntiBody")]
+[CreateAssetMenu(fileName = "NewAntiBody", menuName = "ImmuneDefense/AntiBody")]
 public class AntiBodyData : ScriptableObject
 {
     [SerializeField] private string uniProtID;

@@ -84,10 +84,27 @@ public class DeckManager : MonoBehaviour
         return l;
     }
 
+    public Transform GetHandArea()
+    {
+        return handArea;
+    }
+
     public void DrawHand()
     {
         ClearPlayedHand();
-        for(int i = 0; i < handSize - handArea.childCount; i++)
+        Shuffle();
+        int handCount = 0;
+        foreach (Transform child in handArea)
+        {
+            CardDisplay display = child.GetComponent<CardDisplay>();
+            if (display != null && !display.IsSelected())
+            {
+                handCount++;
+            }
+        }
+
+        int draw = handSize - handCount;
+        for (int i = 0; i < draw; i++)
         {
             if (!DrawCard())
             {
