@@ -8,7 +8,7 @@ public class AntiBodyManager : MonoBehaviour
     [Header("Hand")]
     [SerializeField] private Transform antibodyArea;
 
-    public void AddAntiBody(AntiBodyData antiBody)
+    public bool AddAntiBody(AntiBodyData antiBody)
     {
         if (antibodyArea.childCount < 4)
         {
@@ -16,6 +16,11 @@ public class AntiBodyManager : MonoBehaviour
             AntiBodyDisplay display = newIg.GetComponent<AntiBodyDisplay>();
             display.SetData(antiBody);
             display.UpdateVisuals();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

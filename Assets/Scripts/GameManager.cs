@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlay()
     {
-        for(int i = deck.GetHandArea().childCount - 1; i >= 0; i--)
+        for (int i = deck.GetHandArea().childCount - 1; i >= 0; i--)
         {
             Transform child = deck.GetHandArea().GetChild(i);
             if (child.GetComponent<CardDisplay>().IsSelected())
@@ -73,10 +73,33 @@ public class GameManager : MonoBehaviour
             }
         }
         deck.DrawHand();
+        deck.IncreaseTime();
+    }
+
+    private void spawnAntibodies()
+    {
+        for (int i = deck.GetFactoryArea().childCount - 1; i >= 0; i--)
+        {
+            Transform child = deck.GetFactoryArea().GetChild(i);
+            PlasmacyteData card = (PlasmacyteData)child.GetComponent<CardDisplay>().GetData();
+            if (card.CurrentTime >= 3)
+            {
+                if (pathogens.GetPathogen() != null)
+                {
+                    if (antibody.AddAntiBody(card.GetAntiBody(pathogens.GetPathogen().Antigen)))
+                    {
+                        card.CurrentTime = 0;
+                        deck.AddCard(card);
+                        Destroy(child.gameObject);
+                    }
+
+                }
+            }
+        }
     }
 
     private void Update()
     {
-        
+        spawnAntibodies();
     }
 }

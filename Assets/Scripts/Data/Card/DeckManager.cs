@@ -58,6 +58,11 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    public void AddCard(CardBase card)
+    {
+        deck.Add(card);
+    }
+
     private bool DrawCard()
     {
         if (deck.Count > 0)
@@ -81,7 +86,7 @@ public class DeckManager : MonoBehaviour
         {
             if (child.GetComponent<CardDisplay>().GetData().GetType().Equals(typeof(PlasmacyteData)))
             {
-                l.Add((PlasmacyteData)(child.GetComponent<CardDisplay>().GetData()));
+                l.Add((PlasmacyteData)child.GetComponent<CardDisplay>().GetData());
             }
         }
         return l;
@@ -110,6 +115,15 @@ public class DeckManager : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void IncreaseTime()
+    {
+        foreach(Transform child in factoryArea)
+        {
+            PlasmacyteData card = ((PlasmacyteData)child.GetComponent<CardDisplay>().GetData());
+            card.CurrentTime++;
         }
     }
 

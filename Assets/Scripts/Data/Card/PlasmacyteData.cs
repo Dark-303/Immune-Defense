@@ -8,7 +8,7 @@ public class PlasmacyteData : CardBase
     [SerializeField] private int knownProductionTime;
     private int currentTime = 0;
 
-    public int CurrentTime { get; set; }
+    public int CurrentTime { get => currentTime; set => currentTime = value; }
 
     public AntiBodyData GetAntiBody(AntigenData antigen)
     {
