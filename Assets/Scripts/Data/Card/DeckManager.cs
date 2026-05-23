@@ -11,6 +11,9 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private Transform handArea;
     [SerializeField] private int handSize = 3;
 
+    [Header("Factory")]
+    [SerializeField] private Transform factoryArea;
+
     [Header("Deck")]
     [SerializeField] private List<CardBase> deck = new List<CardBase>();
     [SerializeField] private int redrawCost = 2;
@@ -89,6 +92,27 @@ public class DeckManager : MonoBehaviour
         return handArea;
     }
 
+    public Transform GetFactoryArea()
+    {
+        return factoryArea;
+    }
+
+    public bool SpawnFactory(PlasmacyteData card)
+    {
+        if (factoryArea.childCount <= 0)
+        {
+            GameObject newCard = Instantiate(cardPrefab, factoryArea);
+            CardDisplay display = newCard.GetComponent<CardDisplay>();
+            display.SetData(card);
+            display.UpdateVisuals();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void DrawHand()
     {
         ClearPlayedHand();
@@ -113,5 +137,5 @@ public class DeckManager : MonoBehaviour
         }
     }
 
-    
+
 }

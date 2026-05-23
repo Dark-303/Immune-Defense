@@ -1389,6 +1389,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235997671}
   m_CullTransparentMesh: 1
+--- !u!1 &1280697513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280697514}
+  m_Layer: 5
+  m_Name: Factory_Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1280697514
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280697513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547948158}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 236.57259, y: 225.05269}
+  m_SizeDelta: {x: 157.4249, y: 223.8944}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1494190226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1643,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1280697514}
   - {fileID: 924195234}
   m_Father: {fileID: 1157316172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1631,10 +1667,12 @@ MonoBehaviour:
   cardPrefab: {fileID: 6616000672482802996, guid: 3d0af11e2dbf42e4ba6ffafdd5459f74, type: 3}
   handArea: {fileID: 924195234}
   handSize: 3
+  factoryArea: {fileID: 1280697514}
   deck:
   - {fileID: 11400000, guid: 69e9f0143d3272a47a77f38ffe622e5e, type: 2}
   - {fileID: 11400000, guid: 06c223abedd804941984f53a858f78e8, type: 2}
   - {fileID: 11400000, guid: 96386d0984c92f24199e1637ffe5869b, type: 2}
+  - {fileID: 11400000, guid: 878f5ee7a08287c488f3a335f8b07efc, type: 2}
   redrawCost: 2
 --- !u!1 &1654892559
 GameObject:
@@ -2055,7 +2093,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013475087}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1499367233}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2013475087
 MonoBehaviour:
   m_ObjectHideFlags: 0

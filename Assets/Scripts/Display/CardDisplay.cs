@@ -48,7 +48,7 @@ public class CardDisplay : MonoBehaviour
         return prev;
     }
 
-    private void OnCardClicked()
+    public void OnCardClicked()
     {
         isSelected = !isSelected;
         transform.localPosition += isSelected ? new Vector3(0, 20, 0) : new Vector3(0, -20, 0);

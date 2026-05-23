@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class GameManager : MonoBehaviour
 {
@@ -50,16 +51,28 @@ public class GameManager : MonoBehaviour
 
     public void OnPlay()
     {
-        foreach(Transform child in deck.GetHandArea())
+        for(int i = deck.GetHandArea().childCount - 1; i >= 0; i--)
         {
-            switch (child.GetComponent<CardDisplay>().GetData())
+            Transform child = deck.GetHandArea().GetChild(i);
+            if (child.GetComponent<CardDisplay>().IsSelected())
             {
-                case PlasmacyteData plasmacyte:
-                    break;
-                case CardData card:
-                    break;
+                switch (child.GetComponent<CardDisplay>().GetData())
+                {
+                    case PlasmacyteData plasmacyte:
+                        if (deck.SpawnFactory(plasmacyte))
+                        {
+                            // DC check
+                            child.SetParent(null);
+                            Destroy(child.gameObject);
+                        }
+                        break;
+                    case CardData card:
+                        // Check receptors
+                        break;
+                }
             }
         }
+        deck.DrawHand();
     }
 
     private void Update()
