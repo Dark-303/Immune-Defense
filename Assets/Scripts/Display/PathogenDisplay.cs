@@ -31,6 +31,11 @@ public class PathogenDisplay : MonoBehaviour
         UpdateHealthUI();
     }
 
+    public PathogenData GetData()
+    {
+        return data;
+    }
+
     public void SetData(PathogenData data)
     {
         this.data = data;

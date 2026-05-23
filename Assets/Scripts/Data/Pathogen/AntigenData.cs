@@ -7,4 +7,7 @@ public class AntigenData : ScriptableObject
     [SerializeField] private string uniProtID;
     [SerializeField] private List<AntiBodyData> match;
     [SerializeField] private List<AntiBodyData> compatible;
+
+    public List<AntiBodyData> Matches => match;
+    public string ID => uniProtID;
 }

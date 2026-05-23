@@ -17,6 +17,6 @@ MonoBehaviour:
 
     One of the most numerous immune cells, neutrophils are the
     first responders of the human body.'
-  damage: 15
   cost: 1
-  cardImage: {fileID: 276552112904439268, guid: a1217e95f517bd0468c31103a45f4b11, type: 3}
+  sprite: {fileID: 276552112904439268, guid: a1217e95f517bd0468c31103a45f4b11, type: 3}
+  damage: 15

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18364425407ffd4ab244080d84347f7, type: 3}
   m_Name: POLG_HRV1A
   m_EditorClassIdentifier: Assembly-CSharp::AntigenData
-  uniProtID: 
-  match: []
+  uniProtID: P23008
+  match:
+  - {fileID: 11400000, guid: c798c5368d684684fb701da0497b5c8f, type: 2}
   compatible: []

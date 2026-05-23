@@ -4,7 +4,7 @@ using TMPro;
 
 public class CardDisplay : MonoBehaviour
 {
-    [SerializeField] private CardData data;
+    [SerializeField] private CardBase data;
 
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI nameText;
@@ -24,10 +24,10 @@ public class CardDisplay : MonoBehaviour
     {
         if (data != null)
         {
-            nameText.text = data.GetCardName();
-            descText.text = data.GetDesc();
-            costText.text = data.GetCost().ToString();
-            if (data.GetImage() != null) artworkImage.sprite = data.GetImage();
+            nameText.text = data.Name;
+            descText.text = data.Desc;
+            costText.text = data.Cost.ToString();
+            if (data.Sprite != null) artworkImage.sprite = data.Sprite;
         }
     }
 
@@ -36,14 +36,14 @@ public class CardDisplay : MonoBehaviour
         return isSelected;
     }
 
-    public CardData GetData()
+    public CardBase GetData()
     {
         return data;
     }
 
-    public CardData SetData(CardData data)
+    public CardBase SetData(CardBase data)
     {
-        CardData prev = this.data;
+        CardBase prev = this.data;
         this.data = data;
         return prev;
     }

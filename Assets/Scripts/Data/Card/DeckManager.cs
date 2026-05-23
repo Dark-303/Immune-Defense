@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +12,14 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private int handSize = 3;
 
     [Header("Deck")]
-    [SerializeField] private List<CardData> deck = new List<CardData>();
+    [SerializeField] private List<CardBase> deck = new List<CardBase>();
     [SerializeField] private int redrawCost = 2;
 
-    private List<CardData> masterDeck;
+    private List<CardBase> masterDeck;
 
     private void Start()
     {
-        masterDeck = new List<CardData>(deck);
+        masterDeck = new List<CardBase>(deck);
         Shuffle();
         DrawHand();
     }
@@ -27,7 +28,7 @@ public class DeckManager : MonoBehaviour
     {
         for (int i = 0; i < deck.Count; i++)
         {
-            CardData temp = deck[i];
+            CardBase temp = deck[i];
             int randomIndex = Random.Range(i, deck.Count);
             deck[i] = deck[randomIndex];
             deck[randomIndex] = temp;
@@ -58,7 +59,7 @@ public class DeckManager : MonoBehaviour
     {
         if (deck.Count > 0)
         {
-            CardData data = deck[0];
+            CardBase data = deck[0];
             deck.RemoveAt(0);
 
             GameObject newCard = Instantiate(cardPrefab, handArea);
@@ -68,6 +69,19 @@ public class DeckManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public List<PlasmacyteData> GetPlasmacytes()
+    {
+        List<PlasmacyteData> l = new List<PlasmacyteData>();
+        foreach (Transform child in handArea)
+        {
+            if (child.GetComponent<CardDisplay>().GetData().GetType().Equals(typeof(PlasmacyteData)))
+            {
+                l.Add((PlasmacyteData)(child.GetComponent<CardDisplay>().GetData()));
+            }
+        }
+        return l;
     }
 
     public void DrawHand()
