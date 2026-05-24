@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
     private void RunEnemyTurn()
     {
         health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
-        energy += 2;
+        energy = Mathf.Min(initEnergy, energy + 2);
         UpdateHealthUI();
         UpdateEnergyUI();
     }
