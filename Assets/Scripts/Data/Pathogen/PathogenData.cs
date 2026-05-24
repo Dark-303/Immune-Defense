@@ -11,7 +11,7 @@ public class PathogenData : ScriptableObject
     [SerializeField] private Sprite sprite;
 
     [SerializeField] private AntigenData antigen;
-    [SerializeField] private List<ReceptorTypes> detectable;
+    [SerializeField] private List<ReceptorType> detectable;
 
     // Note to self this is so much nicer.
     public string PathogenName { get => pathogenName; set => pathogenName = value; }
@@ -19,4 +19,5 @@ public class PathogenData : ScriptableObject
     public int MaxDamage { get => maxDamage; set => maxDamage = value; }
     public Sprite Sprite { get => sprite; set => sprite = value; }
     public AntigenData Antigen { get => antigen; set => antigen = value; }
+    public List<ReceptorType> Detectable { get => detectable; }
 }

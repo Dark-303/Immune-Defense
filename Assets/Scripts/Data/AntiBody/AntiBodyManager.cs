@@ -24,6 +24,11 @@ public class AntiBodyManager : MonoBehaviour
         }
     }
 
+    public Transform GetAntibodyArea()
+    {
+        return antibodyArea;
+    }
+
     public void Clear()
     {
         foreach (Transform child in antibodyArea)

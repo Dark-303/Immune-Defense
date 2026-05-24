@@ -1,4 +1,4 @@
-public enum ReceptorTypes
+public enum ReceptorType
 {
     TLR1,
     TLR2,

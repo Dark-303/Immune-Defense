@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-enum AntiBodyType
+public enum AntiBodyType
 {
     [InspectorName("N-IgA")] nIgA,
     [InspectorName("N-IgG1")] nIgG1,
