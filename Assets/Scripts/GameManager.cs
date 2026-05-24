@@ -75,6 +75,11 @@ public class GameManager : MonoBehaviour
 
     public void OnPlay()
     {
+        if (pathogens.GetPathogen() == null)
+        {
+            // return to shop/mainmenu logic
+            return;
+        }
         int totalDamage = 0;
         int totalCost = 0;
         List<Transform> plasmacytes = new List<Transform>();
@@ -181,10 +186,14 @@ public class GameManager : MonoBehaviour
 
     private void RunEnemyTurn()
     {
-        health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
+        if (pathogens.GetPathogen().IsAlive)
+        {
+            health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
+        }
         energy = Mathf.Min(initEnergy, energy + 2);
         UpdateHealthUI();
         UpdateEnergyUI();
+
     }
 
     private void SpawnAntibodies()

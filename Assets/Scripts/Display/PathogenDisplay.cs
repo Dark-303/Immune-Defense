@@ -14,6 +14,8 @@ public class PathogenDisplay : MonoBehaviour
     [SerializeField] private Slider healthbar;
     private int currentHP;
 
+    public bool IsAlive { get => currentHP > 0; }
+
     private void Start()
     {
         currentHP = data.MaxHP;
