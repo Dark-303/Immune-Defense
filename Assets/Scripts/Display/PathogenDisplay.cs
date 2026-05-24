@@ -51,7 +51,7 @@ public class PathogenDisplay : MonoBehaviour
         return Random.Range(0, data.MaxDamage + 1);
     }
 
-    public void TakeDamage(int amount)
+    public void ApplyDamage(int amount)
     {
         currentHP -= amount;
         healthbar.value = currentHP;

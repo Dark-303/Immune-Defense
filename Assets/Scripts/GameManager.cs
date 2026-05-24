@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
                         break;
                     case CardData card:
                         float finalDamage = card.Damage;
-                        foreach (ReceptorType r in pathogens.GetPathogen().Detectable)
+                        foreach (ReceptorType r in pathogens.GetPathogen().GetData().Detectable)
                         {
                             if (card.Unlocked.Contains(r))
                             {
@@ -159,13 +159,21 @@ public class GameManager : MonoBehaviour
                 }
             }
             energy -= totalCost;
-            // Deal damage here
+            pathogens.GetPathogen().ApplyDamage(totalDamage);
             deck.DrawHand();
             deck.IncreaseTime();
             SpawnAntibodies();
             UpdateEnergyUI();
             UpdateHealthUI();
+            pathogens.GetPathogen().UpdateHealthUI();
+            RunEnemyTurn();
         }
+    }
+
+    private void RunEnemyTurn()
+    {
+        health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
+        UpdateHealthUI();
     }
 
     private void SpawnAntibodies()
@@ -178,7 +186,7 @@ public class GameManager : MonoBehaviour
             {
                 if (pathogens.GetPathogen() != null)
                 {
-                    if (antibody.AddAntiBody(card.GetAntiBody(pathogens.GetPathogen().Antigen)))
+                    if (antibody.AddAntiBody(card.GetAntiBody(pathogens.GetPathogen().GetData().Antigen)))
                     {
                         card.CurrentTime = 0;
                         deck.AddCard(card);

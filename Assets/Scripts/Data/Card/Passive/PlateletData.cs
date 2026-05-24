@@ -5,5 +5,5 @@ public class PlateletData : PassiveCardBase
 {
     [SerializeField] private int heal;
 
-    public int Heal => heal;
+    public int Heal { get => Random.Range(0, heal + 1); }
 }

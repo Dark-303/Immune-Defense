@@ -19,11 +19,11 @@ class PathogenManager : MonoBehaviour
         masterList = new List<PathogenData>(pathogens);
     }
 
-    public PathogenData GetPathogen()
+    public PathogenDisplay GetPathogen()
     {
-        foreach (Transform child in pathogenArea)
+        if (pathogenArea.childCount > 0)
         {
-            return child.GetComponent<PathogenDisplay>().GetData();
+            return pathogenArea.GetChild(0).GetComponent<PathogenDisplay>();
         }
         return null;
     }

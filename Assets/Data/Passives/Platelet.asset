@@ -18,4 +18,4 @@ MonoBehaviour:
   sprite: {fileID: 0}
   allowed: 
   unlocked: 
-  heal: 2
+  heal: 50
