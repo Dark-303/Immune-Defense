@@ -27,6 +27,7 @@ public class CardDisplay : MonoBehaviour
             nameText.text = data.Name;
             descText.text = data.Desc;
             costText.text = data.Cost.ToString();
+            isSelected = false;
             if (data.Sprite != null) artworkImage.sprite = data.Sprite;
         }
     }
@@ -50,7 +51,10 @@ public class CardDisplay : MonoBehaviour
 
     public void OnCardClicked()
     {
-        isSelected = !isSelected;
-        transform.localPosition += isSelected ? new Vector3(0, 20, 0) : new Vector3(0, -20, 0);
+        if (!(data is PassiveCardBase))
+        {
+            isSelected = !isSelected;
+            transform.localPosition += isSelected ? new Vector3(0, 20, 0) : new Vector3(0, -20, 0);
+        }
     }
 }

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,38 +20,52 @@ public class GameManager : MonoBehaviour
 
     private int initEnergy;
     private int initHealth;
+    private int maxHealth;
 
     private void Start()
     {
         initEnergy = energy;
         initHealth = health;
+        pathogens.SpawnPathogen();
+        foreach (Transform child in deck.GetPassiveArea())
+        {
+            CardBase card = child.GetComponent<CardDisplay>().GetData();
+            if (card is SkinData skin)
+            {
+                health = skin.GetHealth(health);
+            }
+        }
+        maxHealth = health;
         UpdateEnergyUI();
         UpdateHealthUI();
-        pathogens.SpawnPathogen();
     }
 
     private void UpdateEnergyUI()
     {
         energyBar.maxValue = initEnergy;
         energyBar.value = energy;
-        energyText.text = $"ATP: {energy}/10";
+        energyText.text = $"ATP: {energy}/{initEnergy}";
     }
 
     private void UpdateHealthUI()
     {
-        healthBar.maxValue = initHealth;
+        healthBar.maxValue = maxHealth;
         healthBar.value = health;
-        healthText.text = $"Health: {health}/{initHealth}";
+        healthText.text = $"Health: {health}/{maxHealth}";
     }
 
     public void OnDiscard()
     {
-        deck.DrawHand();
+        if (deck.GetRedrawCost() <= energy)
+        {
+            energy = Mathf.Max(0, energy - deck.GetRedrawCost());
+            UpdateEnergyUI();
+            deck.DrawHand();
+        }
     }
 
     public void OnPlay()
     {
-        SpawnAntibodies();
         int totalDamage = 0;
         int totalCost = 0;
         List<Transform> plasmacytes = new List<Transform>();
@@ -99,6 +111,20 @@ public class GameManager : MonoBehaviour
                                 }
                             }
                         }
+                        foreach (Transform kid in deck.GetPassiveArea())
+                        {
+                            CardBase passive = kid.GetComponent<CardDisplay>().GetData();
+                            if (passive is DCData dendritic)
+                            {
+                                foreach (ReceptorType r in dendritic.Unlocked)
+                                {
+                                    if (card.Unlocked.Contains(r))
+                                    {
+                                        finalDamage *= dendritic.Bonus;
+                                    }
+                                }
+                            }
+                        }
                         totalCost += card.Cost;
                         totalDamage += (int)finalDamage;
                         break;
@@ -107,19 +133,36 @@ public class GameManager : MonoBehaviour
         }
         if (totalCost <= energy && (plasmacytes.Count > 0 || totalDamage > 0))
         {
+            bool DCBoost = false;
             foreach (Transform child in plasmacytes)
             {
                 if (deck.SpawnFactory((PlasmacyteData)child.GetComponent<CardDisplay>().GetData()))
                 {
-                    // DC check
+                    DCBoost = true;
                     child.SetParent(null);
                     Destroy(child.gameObject);
+                }
+            }
+            foreach (Transform child in deck.GetPassiveArea())
+            {
+                CardBase card = child.GetComponent<CardDisplay>().GetData();
+                if (card is PlateletData platelet)
+                {
+                    health = Mathf.Min(maxHealth, health + platelet.Heal);
+                }
+                if (DCBoost)
+                {
+                    if (card is DCData dendritic)
+                    {
+                        deck.IncreaseTime();
+                    }
                 }
             }
             energy -= totalCost;
             // Deal damage here
             deck.DrawHand();
             deck.IncreaseTime();
+            SpawnAntibodies();
             UpdateEnergyUI();
             UpdateHealthUI();
         }

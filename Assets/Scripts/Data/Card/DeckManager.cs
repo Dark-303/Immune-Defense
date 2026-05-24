@@ -14,6 +14,10 @@ public class DeckManager : MonoBehaviour
     [Header("Factory")]
     [SerializeField] private Transform factoryArea;
 
+    [Header("Passive")]
+    [SerializeField] private Transform passiveArea;
+    [SerializeField] private List<PassiveCardBase> passives = new List<PassiveCardBase>();
+
     [Header("Deck")]
     [SerializeField] private List<CardBase> deck = new List<CardBase>();
     [SerializeField] private int redrawCost = 2;
@@ -23,6 +27,7 @@ public class DeckManager : MonoBehaviour
     private void Start()
     {
         masterDeck = new List<CardBase>(deck);
+        SpawnPassives();
         Shuffle();
         DrawHand();
     }
@@ -63,6 +68,11 @@ public class DeckManager : MonoBehaviour
         deck.Add(card);
     }
 
+    public int GetRedrawCost()
+    {
+        return redrawCost;
+    }
+
     private bool DrawCard()
     {
         if (deck.Count > 0)
@@ -84,7 +94,7 @@ public class DeckManager : MonoBehaviour
         List<PlasmacyteData> l = new List<PlasmacyteData>();
         foreach (Transform child in handArea)
         {
-            if (child.GetComponent<CardDisplay>().GetData().GetType().Equals(typeof(PlasmacyteData)))
+            if (child.GetComponent<CardDisplay>().GetData() is PlasmacyteData)
             {
                 l.Add((PlasmacyteData)child.GetComponent<CardDisplay>().GetData());
             }
@@ -100,6 +110,27 @@ public class DeckManager : MonoBehaviour
     public Transform GetFactoryArea()
     {
         return factoryArea;
+    }
+
+    public Transform GetPassiveArea()
+    {
+        return passiveArea;
+    }
+
+    public void SpawnPassives()
+    {
+        foreach (Transform child in passiveArea)
+        {
+            child.SetParent(null);
+            Destroy(child.gameObject);
+        }
+        foreach (CardBase card in passives)
+        {
+            GameObject newCard = Instantiate(cardPrefab, passiveArea);
+            CardDisplay display = newCard.GetComponent<CardDisplay>();
+            display.SetData(card);
+            display.UpdateVisuals();
+        }
     }
 
     public bool SpawnFactory(PlasmacyteData card)
