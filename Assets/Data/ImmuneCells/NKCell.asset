@@ -16,4 +16,6 @@ MonoBehaviour:
   desc: 'Damage: 80'
   cost: 5
   sprite: {fileID: 0}
+  allowed: 0c00000002000000060000000700000008000000
+  unlocked: 0c000000
   damage: 80

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPathogen", menuName = "Enemies/Pathogen")]
@@ -10,6 +11,7 @@ public class PathogenData : ScriptableObject
     [SerializeField] private Sprite sprite;
 
     [SerializeField] private AntigenData antigen;
+    [SerializeField] private List<ReceptorTypes> detectable;
 
     // Note to self this is so much nicer.
     public string PathogenName { get => pathogenName; set => pathogenName = value; }

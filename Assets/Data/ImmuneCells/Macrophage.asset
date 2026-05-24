@@ -18,4 +18,6 @@ MonoBehaviour:
     Big eater'
   cost: 4
   sprite: {fileID: 0}
+  allowed: 090000000a0000000b0000000c000000010000000300000008000000
+  unlocked: 090000000a0000000b0000000c000000
   damage: 60
