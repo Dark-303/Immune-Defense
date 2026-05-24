@@ -56,7 +56,16 @@ public class GameManager : MonoBehaviour
 
     public void OnDiscard()
     {
-        if (deck.GetRedrawCost() <= energy)
+        bool selected = false;
+        foreach (Transform child in deck.GetHandArea())
+        {
+            if (child.GetComponent<CardDisplay>().IsSelected())
+            {
+                selected = true;
+                break;
+            }
+        }
+        if (deck.GetRedrawCost() <= energy && selected)
         {
             energy = Mathf.Max(0, energy - deck.GetRedrawCost());
             UpdateEnergyUI();
@@ -161,8 +170,8 @@ public class GameManager : MonoBehaviour
             energy -= totalCost;
             pathogens.GetPathogen().ApplyDamage(totalDamage);
             deck.DrawHand();
-            deck.IncreaseTime();
             SpawnAntibodies();
+            deck.IncreaseTime();
             UpdateEnergyUI();
             UpdateHealthUI();
             pathogens.GetPathogen().UpdateHealthUI();
@@ -173,7 +182,9 @@ public class GameManager : MonoBehaviour
     private void RunEnemyTurn()
     {
         health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
+        energy += 2;
         UpdateHealthUI();
+        UpdateEnergyUI();
     }
 
     private void SpawnAntibodies()
@@ -186,8 +197,10 @@ public class GameManager : MonoBehaviour
             {
                 if (pathogens.GetPathogen() != null)
                 {
-                    if (antibody.AddAntiBody(card.GetAntiBody(pathogens.GetPathogen().GetData().Antigen)))
+                    AntiBodyData a = card.GetAntiBody(pathogens.GetPathogen().GetData().Antigen);
+                    if (antibody.AddAntiBody(a))
                     {
+                        pathogens.GetPathogen().ApplyDamage(a.Damage);
                         card.CurrentTime = 0;
                         deck.AddCard(card);
                         Destroy(child.gameObject);

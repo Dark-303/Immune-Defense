@@ -8,7 +8,7 @@ public class AntiBodyData : ScriptableObject
     [SerializeField] private string uniProtID;
     [SerializeField] private AntiBodyType type;
     [SerializeField] private Sprite sprite;
-    private HashSet<ReceptorType> receptors;
+    private HashSet<ReceptorType> receptors = new HashSet<ReceptorType>();
     private bool isNotNeutralizer => type != AntiBodyType.nIgG1;
 
     [ShowIf("type", AntiBodyType.nIgG1)]
@@ -19,6 +19,7 @@ public class AntiBodyData : ScriptableObject
     public string ID => uniProtID;
 
     public AntiBodyType Type => type;
+    public int Damage => damage;
 
     public Sprite Sprite { get => sprite; set => sprite = value; }
     public HashSet<ReceptorType> Receptors => receptors;
