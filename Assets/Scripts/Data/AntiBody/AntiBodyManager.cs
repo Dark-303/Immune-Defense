@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class AntiBodyManager : MonoBehaviour
@@ -7,6 +9,13 @@ public class AntiBodyManager : MonoBehaviour
 
     [Header("Hand")]
     [SerializeField] private Transform antibodyArea;
+    [SerializeField] private List<AntiBodyData> knownAntiBodies;
+    private HashSet<AntiBodyData> known;
+
+    private void Start()
+    {
+        known = new HashSet<AntiBodyData>(knownAntiBodies);
+    }
 
     public bool AddAntiBody(AntiBodyData antiBody)
     {
@@ -16,12 +25,26 @@ public class AntiBodyManager : MonoBehaviour
             AntiBodyDisplay display = newIg.GetComponent<AntiBodyDisplay>();
             display.SetData(antiBody);
             display.UpdateVisuals();
+            known.Add(antiBody);
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    public AntiBodyData GetKnown(AntigenData antigen)
+    {
+        foreach (AntiBodyData a in antigen.Matches)
+        {
+            if (known.Contains(a))
+            {
+                return a;
+            }
+        }
+
+        return null;
     }
 
     public Transform GetAntibodyArea()

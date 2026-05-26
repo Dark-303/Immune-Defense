@@ -158,6 +158,16 @@ public class DeckManager : MonoBehaviour
         }
     }
 
+    public void IncreaseTickTime()
+    {
+        foreach (Transform child in factoryArea)
+        {
+            PlasmacyteData card = ((PlasmacyteData)child.GetComponent<CardDisplay>().GetData());
+            card.TickTime++;
+            card.CurrentTime++;
+        }
+    }
+
     public void DrawHand()
     {
         ClearPlayedHand();

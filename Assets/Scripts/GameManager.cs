@@ -172,11 +172,11 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            energy -= totalCost;
+            energy = Mathf.Max(0, energy - totalCost);
             pathogens.GetPathogen().ApplyDamage(totalDamage);
             deck.DrawHand();
             SpawnAntibodies();
-            deck.IncreaseTime();
+            deck.IncreaseTickTime();
             UpdateEnergyUI();
             UpdateHealthUI();
             pathogens.GetPathogen().UpdateHealthUI();
@@ -184,16 +184,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void RunEnemyTurn()
+    private void RunEnemyTurn(int n)
     {
         if (pathogens.GetPathogen().IsAlive)
         {
             health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
         }
-        energy = Mathf.Min(initEnergy, energy + 2);
+        energy = Mathf.Min(initEnergy, energy + n);
         UpdateHealthUI();
         UpdateEnergyUI();
 
+    }
+    
+    private void RunEnemyTurn()
+    {
+        RunEnemyTurn(2);
     }
 
     private void SpawnAntibodies()
@@ -202,7 +207,19 @@ public class GameManager : MonoBehaviour
         {
             Transform child = deck.GetFactoryArea().GetChild(i);
             PlasmacyteData card = (PlasmacyteData)child.GetComponent<CardDisplay>().GetData();
-            if (card.CurrentTime > 3)
+            if (pathogens.GetPathogen() != null && antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen) != null && card.TickTime > 1)
+            {
+                AntiBodyData a = antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen);
+                if (antibody.AddAntiBody(a))
+                {
+                    pathogens.GetPathogen().ApplyDamage(a.Damage);
+                    card.TickTime = 0;
+                    card.CurrentTime = 0;
+                    deck.AddCard(card);
+                    Destroy(child.gameObject);
+                }
+            }
+            else if (card.CurrentTime > 3)
             {
                 if (pathogens.GetPathogen() != null)
                 {
@@ -210,6 +227,7 @@ public class GameManager : MonoBehaviour
                     if (antibody.AddAntiBody(a))
                     {
                         pathogens.GetPathogen().ApplyDamage(a.Damage);
+                        card.TickTime = 0;
                         card.CurrentTime = 0;
                         deck.AddCard(card);
                         Destroy(child.gameObject);
@@ -218,6 +236,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Skip()
+    {
+        SpawnAntibodies();
+        deck.IncreaseTickTime();
+        UpdateEnergyUI();
+        UpdateHealthUI();
+        RunEnemyTurn(1);
     }
 
     private void Update()
