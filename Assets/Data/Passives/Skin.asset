@@ -18,5 +18,5 @@ MonoBehaviour:
   sprite: {fileID: 0}
   allowed: 
   unlocked: 
-  level: 6
+  level: 1
   bonus: 1.2
