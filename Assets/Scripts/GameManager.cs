@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider energyBar;
     [SerializeField] private int energy = 10;
     [SerializeField] private TextMeshProUGUI energyText;
+    [Header("Game Over")]
+    [SerializeField] private Button Respawn;
+    [SerializeField] private TextMeshProUGUI RespawnText;
+    [SerializeField] private Image Overlay;
+    [SerializeField] private TextMeshProUGUI GameOver;
 
     private int initEnergy;
     private int initHealth;
@@ -180,20 +186,35 @@ public class GameManager : MonoBehaviour
             UpdateEnergyUI();
             UpdateHealthUI();
             pathogens.GetPathogen().UpdateHealthUI();
+            CheckHealth();
             RunEnemyTurn();
         }
     }
 
     private void RunEnemyTurn(int n)
     {
+        StartCoroutine(Util.Wait(2.0f));
         if (pathogens.GetPathogen().IsAlive)
         {
             health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
         }
+        StartCoroutine(Util.Wait(2.0f));
         energy = Mathf.Min(initEnergy, energy + n);
+        CheckHealth();
         UpdateHealthUI();
         UpdateEnergyUI();
 
+    }
+
+    private void CheckHealth()
+    {
+        if (health == 0)
+        {
+            Respawn.image.enabled = true;
+            RespawnText.enabled = true;
+            GameOver.enabled = true;
+            Overlay.enabled = true;
+        }
     }
     
     private void RunEnemyTurn()
@@ -207,7 +228,7 @@ public class GameManager : MonoBehaviour
         {
             Transform child = deck.GetFactoryArea().GetChild(i);
             PlasmacyteData card = (PlasmacyteData)child.GetComponent<CardDisplay>().GetData();
-            if (pathogens.GetPathogen() != null && antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen) != null && card.TickTime > 1)
+            if (pathogens.GetPathogen() != null && antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen) != null && card.TickTime >= 1)
             {
                 AntiBodyData a = antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen);
                 if (antibody.AddAntiBody(a))
@@ -216,24 +237,23 @@ public class GameManager : MonoBehaviour
                     card.TickTime = 0;
                     card.CurrentTime = 0;
                     deck.AddCard(card);
+                    child.SetParent(null);
                     Destroy(child.gameObject);
                 }
             }
-            else if (card.CurrentTime > 3)
+            else if (pathogens.GetPathogen() != null && antibody.GetKnown(pathogens.GetPathogen().GetData().Antigen) == null && card.CurrentTime >= 3)
             {
-                if (pathogens.GetPathogen() != null)
+                AntiBodyData a = card.GetAntiBody(pathogens.GetPathogen().GetData().Antigen);
+                if (antibody.AddAntiBody(a))
                 {
-                    AntiBodyData a = card.GetAntiBody(pathogens.GetPathogen().GetData().Antigen);
-                    if (antibody.AddAntiBody(a))
-                    {
-                        pathogens.GetPathogen().ApplyDamage(a.Damage);
-                        card.TickTime = 0;
-                        card.CurrentTime = 0;
-                        deck.AddCard(card);
-                        Destroy(child.gameObject);
-                    }
-
+                    pathogens.GetPathogen().ApplyDamage(a.Damage);
+                    card.TickTime = 0;
+                    card.CurrentTime = 0;
+                    deck.AddCard(card);
+                    child.SetParent(null);
+                    Destroy(child.gameObject);
                 }
+
             }
         }
     }
@@ -244,7 +264,13 @@ public class GameManager : MonoBehaviour
         deck.IncreaseTickTime();
         UpdateEnergyUI();
         UpdateHealthUI();
+        CheckHealth();
         RunEnemyTurn(1);
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Update()
