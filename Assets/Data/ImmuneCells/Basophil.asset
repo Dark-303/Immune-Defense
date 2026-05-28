@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cff88e0a1db164b9858875b342109c, type: 3}
+  m_Name: Basophil
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Basophil
+  desc: 'Damage: 40
+
+    Basophils are cells that alert the body of any aprasites.
+    They play crucial roles in defending the body from multi-cellular organsims.'
+  cost: 0
+  sprite: {fileID: 6435164480148974584, guid: f843e00f66fdf014098be4f84649ba77, type: 3}
+  allowed: 0c0000000e00000000000000010000000300000008000000
+  unlocked: 0c0000000e000000
+  damage: 40

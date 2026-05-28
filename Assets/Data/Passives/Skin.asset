@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e70326ad206f54ba717ec7f91a53fd, type: 3}
   m_Name: Skin
   m_EditorClassIdentifier: Assembly-CSharp::SkinData
-  cardName: Skin
-  desc: 
+  cardName: ' Skin Cell'
+  desc: '+ 20% HP
+
+    Skin cells are a protective shield for your body preventing
+    viruses, bacteria, and infections from getting in and harming you.'
   cost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: -274993997574478944, guid: 22a4e11bd42c8a04eb9d598593000767, type: 3}
   allowed: 
   unlocked: 
   level: 1

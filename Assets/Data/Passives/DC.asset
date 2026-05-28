@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: DC
   m_EditorClassIdentifier: Assembly-CSharp::DCData
   cardName: Dendritic Cell
-  desc: 
+  desc: '-1 Turn for Ig creation
+
+    Boosts cells with the same receptors
+
+    Dentritic
+    Cells or DC are crucial in identifying antigens and presenting them to other
+    immune cells.'
   cost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 6245743518001069938, guid: e91bd25169fdb0248b6afaaf01fe342e, type: 3}
   allowed: 090000000a0000000b0000000c0000000e00000003000000
   unlocked: 090000000a0000000b0000000c0000000e000000
   bonus: 1.2

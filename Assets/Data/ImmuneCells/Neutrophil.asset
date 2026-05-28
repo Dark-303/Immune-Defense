@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Neutrophil
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Neutrophil
-  desc: 'Damage: 10
+  desc: 'Damage: 15
 
     One of the most numerous immune cells, neutrophils are the
     first responders of the human body.'

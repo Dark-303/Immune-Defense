@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: NKCell
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: NK Cell
-  desc: 'Damage: 80'
+  desc: 'Damage: 80
+
+    An innate immune cell that attacks infected cells with chemicals
+    making the infected cell preform apoptosis.'
   cost: 5
-  sprite: {fileID: 0}
+  sprite: {fileID: 1854413221948238603, guid: d8e8f3f1e4cc8de43980b748451bf580, type: 3}
   allowed: 0c00000002000000060000000700000008000000
   unlocked: 0c000000
   damage: 80

@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86cff88e0a1db164b9858875b342109c, type: 3}
-  m_Name: Macrophage
+  m_Name: KillerTCell
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: Macrophage
-  desc: 'Damage: 6
-
-    Large innate immune cells that eat bacteria and other foreign
-    substances'
-  cost: 4
-  sprite: {fileID: -4078459539708628222, guid: effb7d9f3e5106f459528cf7f5d6b2c8, type: 3}
-  allowed: 090000000a0000000b0000000c000000010000000300000008000000
-  unlocked: 090000000a0000000b0000000c000000
-  damage: 60
+  cardName: 
+  desc: 
+  cost: 0
+  sprite: {fileID: 0}
+  allowed: 
+  unlocked: 
+  damage: 0

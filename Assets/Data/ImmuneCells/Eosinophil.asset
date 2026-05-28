@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86cff88e0a1db164b9858875b342109c, type: 3}
+  m_Name: Eosinophil
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cardName: Eosinophil
+  desc: 'Damage: 10
+
+    Eosinophils are cells that are specialized in attacking
+    parasites. They are important for keeping out things like tape worms and Samonella.'
+  cost: 1
+  sprite: {fileID: -942406321955937992, guid: b2c4738ca7c2abf479edc4342f621331, type: 3}
+  allowed: 090000000a0000000b0000000e00000000000000010000000200000003000000040000000600000008000000
+  unlocked: 090000000a0000000b0000000e000000
+  damage: 10

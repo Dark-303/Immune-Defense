@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Platelet
   m_EditorClassIdentifier: Assembly-CSharp::PlateletData
   cardName: Platelet
-  desc: 
+  desc: '+0 to 50 health per round
+
+    Platelets are crucial for healing from wounds
+    and are found in your blood stream. They are the paramedics of your body.'
   cost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 8066155349418888586, guid: a8d4cc4a42a760b49ab9f95db7587054, type: 3}
   allowed: 
   unlocked: 
   heal: 50

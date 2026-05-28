@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Plasmacyte
   m_EditorClassIdentifier: Assembly-CSharp::PlasmacyteData
   cardName: Plasmacyte
-  desc: Generates antibodies
+  desc: 'Generates antibodies
+
+    A powerful immune cell triggered by other B Cells
+    or Helper T Cells. They are one of the most important cells to the adaptive immune
+    system.'
   cost: 7
-  sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 7907024845696551656, guid: dc67cc25961ab4d40b39661ee9db3521, type: 3}
+  allowed: 
+  unlocked: 
   baseProductionTime: 3
   knownProductionTime: 1
