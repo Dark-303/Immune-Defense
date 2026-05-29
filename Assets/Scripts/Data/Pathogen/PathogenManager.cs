@@ -28,8 +28,16 @@ class PathogenManager : MonoBehaviour
         return null;
     }
 
+    public bool HasPathogens => pathogens.Count > 0;
+
     public void SpawnPathogen()
     {
+        if (!HasPathogens) return;
+        foreach (Transform child in antibodyArea)
+        {
+            child.SetParent(null);
+            Destroy(child.gameObject);
+        }
         PathogenData pathogen = pathogens[0];
         pathogens.RemoveAt(0);
         GameObject newPathogen = Instantiate(pathogenPrefab, pathogenArea);

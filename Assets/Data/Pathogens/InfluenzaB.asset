@@ -16,5 +16,5 @@ MonoBehaviour:
   maxHP: 2000
   maxDamage: 200
   sprite: {fileID: -215938281379677897, guid: 49463b7594f79ca47a4e24ed1dc887bb, type: 3}
-  antigen: {fileID: 0}
+  antigen: {fileID: 11400000, guid: e2ec9aa9e85ac0f4e958451b0f94d69e, type: 2}
   detectable: 020000000600000007000000

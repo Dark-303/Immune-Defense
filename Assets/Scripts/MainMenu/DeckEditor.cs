@@ -117,6 +117,7 @@ public class DeckEditor : MonoBehaviour
 
     private void SpawnDeckMenu()
     {
+        if (currCard != null && currCard.IsSelected()) currCard.OnCardClicked();
         currCard = null;
         Clear(menuArea);
         menuText.text = "Deck Editor";
@@ -139,6 +140,7 @@ public class DeckEditor : MonoBehaviour
 
     private void SpawnReceptorMenu(CardDisplay card)
     {
+        if (currCard != null && currCard.IsSelected()) currCard.OnCardClicked();
         currCard = card;
 
         Clear(menuArea);

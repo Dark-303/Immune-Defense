@@ -185,7 +185,10 @@ public class GameManager : MonoBehaviour
             deck.IncreaseTickTime();
             UpdateEnergyUI();
             UpdateHealthUI();
-            pathogens.GetPathogen().UpdateHealthUI();
+            if (pathogens.GetPathogen() != null)
+            {
+                pathogens.GetPathogen().UpdateHealthUI();
+            }
             CheckHealth();
             RunEnemyTurn();
         }
@@ -194,9 +197,14 @@ public class GameManager : MonoBehaviour
     private void RunEnemyTurn(int n)
     {
         StartCoroutine(Util.Wait(2.0f));
-        if (pathogens.GetPathogen().IsAlive)
+        PathogenDisplay p = pathogens.GetPathogen();
+        if (p != null && p.IsAlive)
         {
             health = Mathf.Max(0, health - pathogens.GetPathogen().GetAttack());
+        }
+        else if (pathogens.HasPathogens && (p == null || !p.IsAlive))
+        {
+            pathogens.SpawnPathogen();
         }
         StartCoroutine(Util.Wait(2.0f));
         energy = Mathf.Min(initEnergy, energy + n);
@@ -216,7 +224,7 @@ public class GameManager : MonoBehaviour
             Overlay.enabled = true;
         }
     }
-    
+
     private void RunEnemyTurn()
     {
         RunEnemyTurn(2);
