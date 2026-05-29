@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (pathogens.GetPathogen() == null)
         {
-            // return to shop/mainmenu logic
+            ResetGame();
             return;
         }
         int totalDamage = 0;
@@ -270,7 +270,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Scene_Main");
     }
 
     private void Update()
