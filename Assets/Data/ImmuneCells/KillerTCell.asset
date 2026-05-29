@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cff88e0a1db164b9858875b342109c, type: 3}
   m_Name: KillerTCell
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cardName: 
-  desc: 
-  cost: 0
-  sprite: {fileID: 0}
+  cardName: Killer T Cell
+  desc: 'Damage: 100
+
+    Killer T Cells are the main units of the adaptive immune
+    system. They respond to commands from Helper T Cells and specialize in killing
+    infected cells.'
+  cost: 6
+  sprite: {fileID: -3609629044049351314, guid: 97aea697d4fa4114f8fc92db2c137441, type: 3}
   allowed: 
   unlocked: 
   damage: 0

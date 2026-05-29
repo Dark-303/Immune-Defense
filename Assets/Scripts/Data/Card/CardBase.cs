@@ -15,4 +15,17 @@ public abstract class CardBase : ScriptableObject
     public int Cost => cost;
     public Sprite Sprite => sprite;
     public List<ReceptorType> Unlocked => unlocked;
+
+    public List<ReceptorType> Allowed { get; }
+
+    public void toggleReceptor(ReceptorType r)
+    {
+        if (unlocked.Contains(r))
+        {
+            unlocked.Remove(r);
+        } else if (allowed.Contains(r))
+        {
+            unlocked.Add(r);
+        }
+    }
 }

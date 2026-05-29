@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547b43db896139b419e56597087331e5, type: 3}
   m_Name: HelperTCell
   m_EditorClassIdentifier: Assembly-CSharp::HelperTCell
-  cardName: 
+  cardName: Helper T Cell
   desc: 
   cost: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: -4263035091784199738, guid: e155b175180ed0d48bb12da9199db2d1, type: 3}
   allowed: 
   unlocked: 
   bonus: 1.2

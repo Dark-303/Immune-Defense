@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Basophil
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Basophil
-  desc: 'Damage: 40
+  desc: 'Damage: 30
 
     Basophils are cells that alert the body of any aprasites.
     They play crucial roles in defending the body from multi-cellular organsims.'
-  cost: 0
+  cost: 2
   sprite: {fileID: 6435164480148974584, guid: f843e00f66fdf014098be4f84649ba77, type: 3}
   allowed: 0c0000000e00000000000000010000000300000008000000
   unlocked: 0c0000000e000000
-  damage: 40
+  damage: 30
