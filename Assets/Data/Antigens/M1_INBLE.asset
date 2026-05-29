@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18364425407ffd4ab244080d84347f7, type: 3}
+  m_Name: M1_INBLE
+  m_EditorClassIdentifier: Assembly-CSharp::AntigenData
+  uniProtID: P03489
+  match:
+  - {fileID: 11400000, guid: c846ba9b749a7ca4aa3f7ba9904b58f5, type: 2}
+  - {fileID: 11400000, guid: a0f46b79884e9a046a22256ae4b3ac98, type: 2}
+  compatible: []

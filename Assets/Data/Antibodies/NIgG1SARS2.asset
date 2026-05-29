@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AntiBodyData
   uniProtID: P0DTC2
   type: 1
+  sprite: {fileID: -1259402713141619745, guid: 4bfdc699a9bdbdd488cc0d23bba8763d, type: 3}
   damage: 500
   damageBoost: 0

@@ -26,7 +26,16 @@ public class DeckManager : MonoBehaviour
 
     private void Start()
     {
-        deck = new List<CardBase>(DeckEditor.savedDeck);
+        if (DeckEditor.savedDeck != null)
+        {
+            deck = new List<CardBase>(DeckEditor.savedDeck);
+        }
+
+        if (DeckEditor.savedPassiveDeck != null)
+        {
+            passives = new List<PassiveCardBase>(DeckEditor.savedPassiveDeck);
+        }
+
         masterDeck = new List<CardBase>(deck);
         SpawnPassives();
         Shuffle();

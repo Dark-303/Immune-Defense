@@ -15,6 +15,6 @@ MonoBehaviour:
   pathogenName: Rhinovirus A1
   maxHP: 500
   maxDamage: 10
-  sprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+  sprite: {fileID: 510930458082726310, guid: 9f635831b85d9f94ca6e14497c18028c, type: 3}
   antigen: {fileID: 11400000, guid: 9be552453259d964084453fcbc7d8b27, type: 2}
   detectable: 020000000600000007000000

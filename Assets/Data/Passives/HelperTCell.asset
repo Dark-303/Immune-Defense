@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: HelperTCell
   m_EditorClassIdentifier: Assembly-CSharp::HelperTCell
   cardName: Helper T Cell
-  desc: 
+  desc: '20% Damage Boost to T Killer Cells
+
+    Helper T Cells are the commanders
+    of the adaptive immune system. They tell the plasma cells what to produce and
+    the Killer T Cells what to attack.'
   cost: 0
   sprite: {fileID: -4263035091784199738, guid: e155b175180ed0d48bb12da9199db2d1, type: 3}
   allowed: 

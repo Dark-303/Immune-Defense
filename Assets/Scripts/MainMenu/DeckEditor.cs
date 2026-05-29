@@ -17,6 +17,10 @@ public class DeckEditor : MonoBehaviour
     [SerializeField] private List<CardBase> playingDeck = new List<CardBase>();
     [SerializeField] private Transform deckArea;
 
+    [Header("Passive Deck")]
+    [SerializeField] private List<PassiveCardBase> passiveDeck = new List<PassiveCardBase>();
+    [SerializeField] private Transform passiveDeckArea;
+
     [Header("Menu")]
     [SerializeField] private Transform menuArea;
     [SerializeField] private TextMeshProUGUI menuText;
@@ -24,6 +28,7 @@ public class DeckEditor : MonoBehaviour
     private CardDisplay currCard;
 
     public static List<CardBase> savedDeck;
+    public static List<PassiveCardBase> savedPassiveDeck;
 
     private void Start()
     {
@@ -31,52 +36,83 @@ public class DeckEditor : MonoBehaviour
         {
             playingDeck = new List<CardBase>(savedDeck);
         }
+        if (savedPassiveDeck != null)
+        {
+            passiveDeck = new List<PassiveCardBase>(savedPassiveDeck);
+        }
         SpawnDeckMenu();
+        UpdateDeckUI();
     }
 
     private void AddCard(CardBase card)
     {
-        if (playingDeck.Count >= 12)
+        if (card is PassiveCardBase passive)
         {
-            return;
+            if (passiveDeck.Count >= 3)
+            {
+                return;
+            }
+            PassiveCardBase newCard = Instantiate(passive);
+            passiveDeck.Add(newCard);
         }
-
-        CardBase newCard = Instantiate(card);
-        playingDeck.Add(newCard);
+        else
+        {
+            if (playingDeck.Count >= 12)
+            {
+                return;
+            }
+            CardBase newCard = Instantiate(card);
+            playingDeck.Add(newCard);
+        }
         UpdateDeckUI();
     }
 
     private void RemoveCard(CardBase card)
     {
-        playingDeck.Remove(card);
+        if (playingDeck.Contains(card))
+        {
+            playingDeck.Remove(card);
+        }
+        else if (card is PassiveCardBase passive && passiveDeck.Contains(passive))
+        {
+            passiveDeck.Remove(passive);
+        }
         UpdateDeckUI();
     }
 
     private void UpdateDeckUI()
     {
-        foreach (Transform child in deckArea)
-        {
-            Destroy(child.gameObject);
-        }
+        Clear(deckArea);
+        Clear(passiveDeckArea);
 
         foreach (CardBase card in playingDeck)
         {
-            GameObject newCard = Instantiate(cardPrefab, deckArea);
-            CardDisplay display = newCard.GetComponent<CardDisplay>();
-            display.SetData(card);
-            display.UpdateVisuals();
-            newCard.GetComponentInChildren<Button>().onClick.AddListener(() =>
-            {
-                if (currCard != null && currCard == display)
-                {
-                    SpawnDeckMenu();
-                }
-                else
-                {
-                    SpawnReceptorMenu(display);
-                }
-            });
+            CreateCard(card, deckArea);
         }
+
+        foreach (PassiveCardBase card in passiveDeck)
+        {
+            CreateCard(card, passiveDeckArea);
+        }
+    }
+
+    private void CreateCard(CardBase card, Transform area)
+    {
+        GameObject newCard = Instantiate(cardPrefab, area);
+        CardDisplay display = newCard.GetComponent<CardDisplay>();
+        display.SetData(card);
+        display.UpdateVisuals();
+        newCard.GetComponentInChildren<Button>().onClick.AddListener(() =>
+        {
+            if (currCard != null && currCard == display)
+            {
+                SpawnDeckMenu();
+            }
+            else
+            {
+                SpawnReceptorMenu(display);
+            }
+        });
     }
 
     private void SpawnDeckMenu()
@@ -125,8 +161,8 @@ public class DeckEditor : MonoBehaviour
                 GameObject newToggle = Instantiate(TogglePrefab, menuArea);
                 newToggle.GetComponent<ReceptorData>().rec = r;
                 newToggle.GetComponentInChildren<TextMeshProUGUI>().text = r.ToString();
-                newToggle.GetComponent<Toggle>().SetIsOnWithoutNotify(card.GetData().Unlocked.Contains(r));
-                newToggle.GetComponent<Toggle>().onValueChanged.AddListener((isOn) => ToggleReceptor(newToggle));
+                newToggle.GetComponentInChildren<Toggle>().SetIsOnWithoutNotify(card.GetData().Unlocked.Contains(r));
+                newToggle.GetComponentInChildren<Toggle>().onValueChanged.AddListener((isOn) => ToggleReceptor(newToggle));
             }
         }
     }
@@ -142,6 +178,7 @@ public class DeckEditor : MonoBehaviour
     public void SaveDeck()
     {
         savedDeck = new List<CardBase>(playingDeck);
+        savedPassiveDeck = new List<PassiveCardBase>(passiveDeck);
         SceneManager.LoadScene("Scene_01");
     }
 }
